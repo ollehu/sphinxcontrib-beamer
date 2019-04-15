@@ -1,0 +1,2 @@
+class BeamerDirective(Directive):
+    pass
