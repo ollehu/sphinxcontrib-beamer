@@ -104,19 +104,19 @@ def setup(app):
     }
 
 """ This needs to be done for 'make beamer' to compile:
-        * Insert
+        [x] Insert
             \newcommand{\paragraph}{}
             \newcommand{\subparagraph}{}
           in the pre-ample. For titlesec compability.
-        * Replace sphinxmaketitle with maketitle for footnote
+        [x] Replace sphinxmaketitle with maketitle for footnote
           compability.
-        * Replace the documentclass to beamer.
-        * Replace \chapter{#1} with
+        [x] Replace the documentclass to beamer.
+        [ ] Replace \chapter{#1} with
             \begin{frame}{#1}
                 ...
             \end{frame}
-        * Remove 'Indices and tables' all together.
-        * Don't print indices.
-        * Don't print table of contents.
-        * Don't print \pagestyle{normal}.
+        [x] Remove 'Indices and tables' all together.
+        [x] Don't print indices.
+        [x] Don't print table of contents.
+        [x] Don't print \pagestyle{normal}.
 """
