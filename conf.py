@@ -14,7 +14,7 @@
 #
 import os
 import sys
-sys.path.append(os.path.abspath('./_ext'))
+sys.path.append(os.path.abspath('./beamer'))
 
 
 # -- Project information -----------------------------------------------------
@@ -39,8 +39,10 @@ release = u''
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.mathjax',
+    "sphinx.ext.mathjax",
     "beamer",
+    "matplotlib.sphinxext.only_directives",
+    "matplotlib.sphinxext.plot_directive",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
