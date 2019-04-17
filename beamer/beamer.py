@@ -136,6 +136,8 @@ def setup(app):
         * Replace subsections with bold, or something
           subsection-looking in beamer. Not with a new frame.
         * Use the NIRA Beamer template.
+        * Add fragile option to frames containing the
+          sphinxVerbatim environment.
 
        (* Solve the highlightning warning?)
        (* Solve the PyLint warnings?)
