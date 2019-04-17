@@ -138,6 +138,8 @@ def setup(app):
         * Use the NIRA Beamer template.
         * Add fragile option to frames containing the
           sphinxVerbatim environment.
+        * Set the allowframebreaks option by default.
+          Should it be a setting to disable?
 
        (* Solve the highlightning warning?)
        (* Solve the PyLint warnings?)
