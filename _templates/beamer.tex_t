@@ -46,6 +46,7 @@
 <%= tocdepth %>
 <%= secnumdepth %>
 <%= preamble %>
+\usetheme{<%= beamer_theme %>}
 
 \title{<%= title %>}
 \date{<%= date %>}
