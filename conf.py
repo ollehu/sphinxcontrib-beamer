@@ -15,6 +15,7 @@
 import os
 import sys
 sys.path.append(os.path.abspath('./beamer'))
+sys.path.append(os.path.abspath('./tikz/sphinxcontrib'))
 
 
 # -- Project information -----------------------------------------------------
@@ -33,16 +34,15 @@ release = u''
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
-# needs_sphinx = '1.0'
+needs_sphinx = '1.4'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
     "sphinx.ext.mathjax",
+    "tikz",
     "beamer",
-    "matplotlib.sphinxext.only_directives",
-    "matplotlib.sphinxext.plot_directive",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -67,7 +67,7 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = []
+exclude_patterns = ["tikz"]
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = None
@@ -89,7 +89,6 @@ html_theme = 'alabaster'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.

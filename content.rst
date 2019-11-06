@@ -28,12 +28,7 @@ Hint:
 Final Page
 ==========
 
-.. plot::
+.. tikz::
 
-   import matplotlib.pyplot as plt
-   import numpy as np
-   x = np.random.randn(1000)
-   plt.hist( x, 20)
-   plt.grid()
-   plt.title(r'Normal: $\mu=%.2f, \sigma=%.2f$'%(x.mean(), x.std()))
-   plt.show()
+   \draw[thick,rounded corners=8pt]
+   (0,0)--(0,2)--(1,3.25)--(2,2)--(2,0)--(0,2)--(2,2)--(0,0)--(2,0);
