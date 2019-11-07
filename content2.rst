@@ -1,6 +1,10 @@
 Test
 ====
 
+.. raw:: latex
+
+   \classified
+
 Content
 
 #. asd
@@ -8,6 +12,10 @@ Content
 
 Another page
 ============
+
+.. raw:: latex
+
+   \confidential
 
 :math:`2\pi`
 

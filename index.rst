@@ -12,7 +12,8 @@ TOC TREE
 --------
 
 .. toctree::
-   :maxdepth: 0
+   :maxdepth: 1
+   :caption: ToC 1
 
    content
 

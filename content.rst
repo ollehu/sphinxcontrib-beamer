@@ -8,6 +8,7 @@ Content
 
 Another page
 ============
+.. frame_options: plain
 
 :math:`2\pi`
 

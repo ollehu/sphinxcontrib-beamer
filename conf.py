@@ -110,7 +110,7 @@ htmlhelp_basename = 'beamerdoc'
 # -- Options for LaTeX output ------------------------------------------------
 
 latex_additional_files = \
-    [os.path.join(templates_path[0], "beamerthemenira.sty"),
+    [os.path.join(templates_path[0], "beamerthemenira2.sty"),
      os.path.join(templates_path[0], "nira_logo_bw.pdf"),
      os.path.join(templates_path[0], "nira_logo.pdf")
     ]
@@ -184,4 +184,4 @@ epub_exclude_files = ['search.html']
 
 # -- Extension configuration -------------------------------------------------
 
-beamer_theme = "nira"
+beamer_theme = "nira2"

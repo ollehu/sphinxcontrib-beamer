@@ -1,5 +1,5 @@
-"""Sphinxextension for Beamer.
-
+"""
+Sphinxextension for Beamer.
 Outputs a Beamer LaTeX file.
 """
 
@@ -8,18 +8,22 @@ from sphinx.builders.latex import LaTeXBuilder
 from sphinx.writers.latex import LaTeXTranslator
 from sphinx.util.template import SphinxRenderer
 
-import docutils
 from docutils import nodes
+import re
+import pudb
 
 
 class BeamerTranslator(LaTeXTranslator):
-    """Beamer translator class.
+    """
+    Beamer translator class.
     Overloaded to define directives and render
     the correct template.
     """
 
-
     def __init__(self, document, builder):
+        """
+        Set up Beamer elements.
+        """
         LaTeXTranslator.__init__(self, document, builder)
         self.elements["maketitle"] = r"\maketitle"
         self.elements["makeindex"] = ""
@@ -34,21 +38,21 @@ class BeamerTranslator(LaTeXTranslator):
         ]
         self.elements["allowframebreaks"] = \
             builder.config_options["allowframebreaks"]
-        self.in_open_frame = 0
-
 
     def astext(self):
-        # type: () -> unicode
+        """
+        Pass the Beamer template to the renderer.
+        """
         self.elements.update({
             'body': u''.join(self.body),
             'indices': self.generate_indices()
         })
         return self.render('beamer.tex_t', self.elements)
 
-
     def render(self, template_name, variables):
-        # type: (unicode, Dict) -> unicode
-
+        """
+        Render Beamer using template.
+        """
         for template_dir in self.builder.config.templates_path:
             template = path.join(self.builder.confdir, template_dir,
                                  template_name)
@@ -57,42 +61,38 @@ class BeamerTranslator(LaTeXTranslator):
 
         return BeamerRenderer().render(template_name, variables)
 
-
     def visit_title(self, node):
         """
-        Prepend with begin frame.
+        Prepend titles with begin frame.
+        Also, append options such as allowframebreaks and fragile.
         """
         # Calculate (saturated) node depth and check if previous frame should
         # be closed.
         node_depth = min(node["depth"], len(self.section_levels) - 1)
         if node_depth == 0 and not node["first_section"]:
             self.body.append(r"\end{frame}")
+            self.body.append("\n\n")
 
         # Set up options.
-        options = []
+        options = node["frame_options"]
         if self.elements["allowframebreaks"]:
             options.append("allowframebreaks")
-        if node["verbatim"]:
-            options.append("fragile")
 
         # If frame environment, add options.
         self.body.append(self.section_levels[node_depth])
         if node_depth == 0:
-            self.in_open_frame = 1
             if options:
                 self.body.append("[" + ", ".join(options) + "]")
 
         # Close environments.
         self.body.append(r"{")
-        self.context.append(r"}\n")
-        self.in_title = 1
-
+        self.context.append("}\n")
 
     def depart_title(self, node):
-        """Append with closing bracket."""
-
+        """
+        Append with closing bracket.
+        """
         self.body.append("}\n")
-        self.in_title = 0
 
     def depart_document(self, node):
         """
@@ -102,18 +102,18 @@ class BeamerTranslator(LaTeXTranslator):
 
 
 class BeamerRenderer(SphinxRenderer):
-    """Beamer renderer.
+    """
+    Beamer renderer.
     Overloaded to pass along the custom
     template path.
     """
-
 
     def __init__(self, template_path=""):
         # type: () -> None
         super(BeamerRenderer, self).__init__(template_path)
 
-        # use JSP/eRuby like tagging instead because curly bracket; the default
-        # tagging of jinja2 is not good for LaTeX sources.
+        # Use JSP/eRuby like tagging instead because of curly brackets -  the
+        # default tagging of jinja2 is not good for LaTeX sources.
         self.env.variable_start_string = '<%='
         self.env.variable_end_string = '%>'
         self.env.block_start_string = '<%'
@@ -129,7 +129,6 @@ class BeamerBuilder(LaTeXBuilder):
     format = "latex"
     config_options = {}
 
-
     def init(self):
         self.default_translator_class = BeamerTranslator
         super(BeamerBuilder, self).init()
@@ -139,37 +138,48 @@ class BeamerBuilder(LaTeXBuilder):
             self.config.beamer_theme
 
 
-def adjust_titles(app, doctree, docname):
+def adjust_titles(_app, doctree, _docname):
     """Function which adjust titles. Chapters
     are kept as titles where CONTINUE..."""
 
-    def traverse_parent(depth, node):
-        """Recursively find depth of section node.
+    def calc_node_depth(depth, node):
+        """
+        Recursively find depth of a section node.
         This will always terminate as the top node
         is a document instance.
         """
-        if not isinstance(node, docutils.nodes.section):
+        if not isinstance(node, nodes.section):
             return depth - 1
-        return traverse_parent(depth + 1, node.parent)
+        return calc_node_depth(depth + 1, node.parent)
+
+    def is_frame_option(node):
+        return ("frame_options:" in node.astext()
+                and isinstance(node, nodes.comment))
 
     first_section = True
-    for section in doctree.traverse(docutils.nodes.section):
+    for section in doctree.traverse(nodes.section):
         # Calculate depth.
-        depth = traverse_parent(0, section)
-        section["depth"] = depth
-        section["first_section"] = first_section
+        depth = calc_node_depth(0, section)
 
         # Look for verbatim in root nodes.
-        has_verbatim = False
+        frame_options = []
         for node in section.traverse():
-            if isinstance(node, docutils.nodes.literal_block) and depth == 0:
-                has_verbatim = True
+            if isinstance(node, nodes.literal_block) and depth == 0:
+                frame_options.append('fragile')
                 break
 
-        for title in section.traverse(docutils.nodes.title):
+        for title in section.traverse(nodes.title):
             title["depth"] = depth
-            title["verbatim"] = has_verbatim
             title["first_section"] = first_section
+
+            if depth == 0:
+                for comment in section.traverse(condition=is_frame_option):
+                    options = re.search("^frame_options:(.*$)",
+                                         comment.astext()).groups()[0]
+                    for opt in options.split(","):
+                        if opt.strip() not in frame_options:
+                            frame_options.append(opt.strip())
+            title["frame_options"] = frame_options
 
         # First section covered.
         if first_section:
@@ -189,7 +199,7 @@ def setup(app):
     app.connect("doctree-resolved", adjust_titles)
 
     return {
-        "version": "0.1",
+        "version": "1.0",
         "parallel_read_safe": True,
         "parallel_write_safe": True,
     }
