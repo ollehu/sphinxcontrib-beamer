@@ -20,7 +20,7 @@ Load the extension in the Sphinx project configuration file ``conf.py``::
 
    extensions = ['sphinxcontrib.beamer']
 
-and build your Beamer LaTeX output using the new Builder::
+and build your Beamer LaTeX output using the new builder::
 
    sphinx-build -b beamer build/doctrees . build
 
@@ -65,3 +65,6 @@ which will generate a frame environment
 
 ``plain`` in the example above can be replaced with any comma-separated string
 of valid frame options.
+
+.. note:: This extension is still in its beta stage and has not been thorougly
+tested. Use it with caution.
