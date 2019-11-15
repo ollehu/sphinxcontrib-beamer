@@ -1,0 +1,65 @@
+==========================================
+Description of the Beamer Sphinx Extension
+==========================================
+
+This extension to `Sphinx <https://www.sphinx-doc.org/en/master/>`__ adds a
+`Builder <https://www.sphinx-doc.org/en/master/usage/builders/index.html>`__ for
+the `Beamer <https://ctan.org/pkg/beamer>`__ LaTeX class.
+
+Installation
+============
+The extension is distributed through the Python Package Index and installed with
+
+.. code-block::
+
+   pip install sphinxcontrib-beamer
+
+Usage
+=====
+Load the extension in the Sphinx project configuration file ``conf.py``
+
+   extensions = ['sphinxcontrib.beamer']
+
+and build your Beamer LaTeX output using the new Builder
+
+.. code-block::
+
+   sphinx-build -b beamer build/doctrees . build
+
+Configuration
+-------------
+Some variables are configurable in ``conf.py``::
+
+* Change the theme used by Beamer (defaults to ``Warsaw``)::
+
+   beamer_theme = <string>
+
+  where ``beamertheme<string>.sty`` is a LaTeX style file in the
+  ``templates_path`` path specified in ``conf.py``.
+
+* Change if frame breaks are allowed (defaults to True)::
+
+   beamer_allowframebreaks = <True or False>
+
+which sets the ``allowframebreaks`` option to all frames. This Beamer feature
+splits a frame environment into multiple slides if the content extends beyond
+what can be viewed on one slide.
+
+* Add custom frame options::
+
+   Frame Title
+   -----------
+   .. frame_options:plain
+
+   Frame content.
+
+will generate the frame environment
+
+   \begin{frame}[plain]{Frame Title}
+
+      Frame content.
+
+   \end{frame}
+
+``plain`` in the example above can be replaced with any comma-separated string
+of valid frame options.

@@ -10,7 +10,6 @@ from sphinx.util.template import SphinxRenderer
 
 from docutils import nodes
 import re
-import pudb
 
 
 class BeamerTranslator(LaTeXTranslator):

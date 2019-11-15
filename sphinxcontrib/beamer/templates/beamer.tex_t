@@ -32,13 +32,13 @@
 \let\subparagraph\section
 \let\definitions\relax
 \let\enddefinitions\relax
+\let\capstart\relax
 \usepackage{fancyhdr}
 \usepackage<%= sphinxpkgoptions %>{sphinx}
 <%= sphinxsetup %>
 <%= fvset %>
 <%= geometry %>
 <%= usepackages %>
-<%= hyperref %>
 <%= contentsname %>
 <%= numfig_format %>
 <%= translatablestrings %>
@@ -47,17 +47,6 @@
 <%= secnumdepth %>
 <%= preamble %>
 \usetheme{<%= beamer_theme %>}
-%% Apply continuation count only if a slide is split into multiple slides.
-\makeatletter
-\defbeamertemplate*{frametitle continuation}{only if multiple}{%
-    \ifnum \numexpr\beamer@endpageofframe+1-\beamer@startpageofframe\relax > 1
-        \textmd{(%
-            \insertcontinuationcount/%
-            \the\numexpr\beamer@endpageofframe+1-\beamer@startpageofframe%
-        )}%
-    \fi%
-}
-\makeatother
 \title{<%= title %>}
 \date{<%= date %>}
 \release{<%= release %>}

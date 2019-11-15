@@ -1,0 +1,6 @@
+include README*
+include LICENSE
+
+# Documentation
+include doc/*.rst
+include doc/conf.py
