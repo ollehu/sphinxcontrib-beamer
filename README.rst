@@ -28,16 +28,16 @@ and build your Beamer LaTeX output using the new Builder
 
 Configuration
 -------------
-Some variables are configurable in ``conf.py``::
+Some variables are configurable in ``conf.py``:
 
-* Change the theme used by Beamer (defaults to ``Warsaw``)::
+**Theming:** Change the theme used by Beamer (defaults to ``Warsaw``) with
 
    beamer_theme = <string>
 
   where ``beamertheme<string>.sty`` is a LaTeX style file in the
   ``templates_path`` path specified in ``conf.py``.
 
-* Change if frame breaks are allowed (defaults to True)::
+**Frame breaks:** Change if frame breaks are allowed (defaults to True) with
 
    beamer_allowframebreaks = <True or False>
 
@@ -45,7 +45,7 @@ which sets the ``allowframebreaks`` option to all frames. This Beamer feature
 splits a frame environment into multiple slides if the content extends beyond
 what can be viewed on one slide.
 
-* Add custom frame options::
+**Custom frame options:** Add custom frame options with
 
    Frame Title
    -----------
@@ -53,7 +53,7 @@ what can be viewed on one slide.
 
    Frame content.
 
-will generate the frame environment
+which will generate a frame environment
 
    \begin{frame}[plain]{Frame Title}
 
