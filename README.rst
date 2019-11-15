@@ -34,8 +34,8 @@ Some variables are configurable in ``conf.py``:
 
    beamer_theme = <string>
 
-  where ``beamertheme<string>.sty`` is a LaTeX style file in the
-  ``templates_path`` path specified in ``conf.py``.
+where ``beamertheme<string>.sty`` is a LaTeX style file in the
+``templates_path`` path specified in ``conf.py``.
 
 **Frame breaks:** Change if frame breaks are allowed (defaults to True) with
 
@@ -47,6 +47,8 @@ what can be viewed on one slide.
 
 **Custom frame options:** Add custom frame options with
 
+.. code-block::
+
    Frame Title
    -----------
    .. frame_options:plain
@@ -54,6 +56,8 @@ what can be viewed on one slide.
    Frame content.
 
 which will generate a frame environment
+
+.. code-block::
 
    \begin{frame}[plain]{Frame Title}
 
