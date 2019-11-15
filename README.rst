@@ -67,4 +67,4 @@ which will generate a frame environment
 of valid frame options.
 
 .. note:: This extension is still in its beta stage and has not been thorougly
-tested. Use it with caution.
+  tested. Use it with caution.
