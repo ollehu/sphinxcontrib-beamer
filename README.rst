@@ -66,7 +66,5 @@ which will generate a frame environment
 ``plain`` in the example above can be replaced with any comma-separated string
 of valid frame options.
 
-.. note::
-
-   This extension is still in its beta stage and has not been thorougly
-   tested. Use it with caution.
+**This extension is still in its beta stage and has not been thorougly tested.
+Use it with caution.**
