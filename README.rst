@@ -16,13 +16,11 @@ The extension is distributed through the Python Package Index and installed with
 
 Usage
 =====
-Load the extension in the Sphinx project configuration file ``conf.py``
+Load the extension in the Sphinx project configuration file ``conf.py``::
 
    extensions = ['sphinxcontrib.beamer']
 
-and build your Beamer LaTeX output using the new Builder
-
-.. code-block::
+and build your Beamer LaTeX output using the new Builder::
 
    sphinx-build -b beamer build/doctrees . build
 
@@ -30,14 +28,14 @@ Configuration
 -------------
 Some variables are configurable in ``conf.py``:
 
-**Theming:** Change the theme used by Beamer (defaults to ``Warsaw``) with
+**Theming:** Change the theme used by Beamer (defaults to ``Warsaw``) with::
 
    beamer_theme = <string>
 
 where ``beamertheme<string>.sty`` is a LaTeX style file in the
 ``templates_path`` path specified in ``conf.py``.
 
-**Frame breaks:** Change if frame breaks are allowed (defaults to True) with
+**Frame breaks:** Change if frame breaks are allowed (defaults to True) with::
 
    beamer_allowframebreaks = <True or False>
 
