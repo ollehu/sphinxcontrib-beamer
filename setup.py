@@ -7,14 +7,14 @@ with open("README.rst", "r") as fh:
 
 setup(
     name="sphinxcontrib-beamer",
-    version="0.0.1",
+    version="0.0.2",
     author="Olle Hynén Ulfsjöö",
     author_email="ollehu@gmail.com",
     description="Beamer extension for Sphinx",
     long_description=long_description,
     long_description_content_type="text/x-rst",
     url="https://github.com/ollehu/sphinxcontrib-beamer",
-    package_data={'': os.path.join('templates/beamer.tex_t')},
+    package_data={'': [os.path.join('templates/beamer.tex_t')]},
     packages=find_packages(),
     classifiers=[
         "Development Status :: 3 - Alpha",
