@@ -52,13 +52,10 @@ class BeamerTranslator(LaTeXTranslator):
         """
         Render Beamer using template.
         """
-        for template_dir in self.builder.config.templates_path:
-            template = path.join(self.builder.confdir, template_dir,
-                                 template_name)
-            if path.exists(template):
-                return BeamerRenderer(template_dir).render(template, variables)
-
-        return BeamerRenderer().render(template_name, variables)
+        template_dir = 'templates'
+        template = path.join(path.dirname(path.abspath(__file__)),
+                             template_dir, template_name)
+        return BeamerRenderer(template_dir).render(template, variables)
 
     def visit_title(self, node):
         """

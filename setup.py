@@ -7,7 +7,7 @@ with open("README.rst", "r") as fh:
 
 setup(
     name="sphinxcontrib-beamer",
-    version="0.0.2",
+    version="0.0.1",
     author="Olle Hynén Ulfsjöö",
     author_email="ollehu@gmail.com",
     description="Beamer extension for Sphinx",
