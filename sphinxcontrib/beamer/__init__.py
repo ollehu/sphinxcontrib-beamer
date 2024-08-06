@@ -19,11 +19,11 @@ class BeamerTranslator(LaTeXTranslator):
     the correct template.
     """
 
-    def __init__(self, document, builder):
+    def __init__(self, document, builder, theme):
         """
         Set up Beamer elements.
         """
-        LaTeXTranslator.__init__(self, document, builder)
+        LaTeXTranslator.__init__(self, document, builder, theme)
         self.elements["maketitle"] = r"\maketitle"
         self.elements["makeindex"] = ""
         self.elements["printindex"] = ""
